@@ -1,0 +1,16 @@
+.wrapper {
+  background-color: rgb(32, 32, 32);
+  min-height: 100vh;
+}
+
+nav {
+  background: rgba(0, 0, 0, 0.342);
+}
+
+.hero {
+  position: relative;
+  min-height: 80vh;
+}
+.hero-content {
+  max-width: 450px;
+}
