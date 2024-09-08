@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MovieCard } from "./MovieCard";
 import { fetchFromAPI } from "../utils/axios";
 import { randomChar } from "../utils/random";
@@ -6,9 +6,16 @@ import { randomChar } from "../utils/random";
 export const Hero = () => {
   const [searchedMovie, setSearchedMovie] = useState({});
   const [bgImg, setBgImg] = useState("");
+
+  // use this shouldFetch to load or fetch movie only one time when refresh the browser
+  const shouldFetch = useRef(true);
+
   useEffect(() => {
     // fetchMovie();
-    fetchMovie(randomChar());
+    if (shouldFetch.current) {
+      fetchMovie(randomChar());
+      shouldFetch.current = false;
+    }
   }, []);
 
   const fetchMovie = async (str) => {
