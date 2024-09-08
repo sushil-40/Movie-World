@@ -7,14 +7,15 @@ export const Hero = () => {
   const [searchedMovie, setSearchedMovie] = useState({});
   const [bgImg, setBgImg] = useState("");
 
-  // use this shouldFetch to load or fetch movie only one time when refresh the browser
-  const shouldFetch = useRef(true);
+  // use this shouldFetchRef to load or fetch movie only one time when refresh the browser
+  const shouldFetchRef = useRef(true);
+  const searchRef = useRef("");
 
   useEffect(() => {
     // fetchMovie();
-    if (shouldFetch.current) {
+    if (shouldFetchRef.current) {
       fetchMovie(randomChar());
-      shouldFetch.current = false;
+      shouldFetchRef.current = false;
     }
   }, []);
 
@@ -23,6 +24,13 @@ export const Hero = () => {
     setSearchedMovie(movie);
     setBgImg(movie.Poster);
     // console.log(movie);
+  };
+
+  const handleOnMovieSearch = () => {
+    const str = searchRef.current.value;
+    console.log(str);
+    fetchMovie(str);
+    searchRef.current.value = "";
   };
   const movieStyle = {
     backgroundImage: `url(
@@ -56,14 +64,20 @@ export const Hero = () => {
 
           <div className="input-group mby-5">
             <input
+              ref={searchRef}
               type="text"
               className="form-control"
-              placeholder="Recipient's username"
-              aria-label="Recipient's username"
+              placeholder="search movie by name ..."
+              aria-label="search movie by name ..."
               aria-describedby="button-addon2"
             />
-            <button className="btn btn-danger" type="button" id="button-addon2">
-              Button
+            <button
+              onClick={handleOnMovieSearch}
+              className="btn btn-danger"
+              type="button"
+              id="button-addon2"
+            >
+              Search
             </button>
           </div>
 
