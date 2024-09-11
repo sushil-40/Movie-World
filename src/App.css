@@ -11,8 +11,18 @@ nav {
   position: relative;
   min-height: 80vh;
 }
+.hero::after {
+  content: "";
+  position: absolute;
+  background: rgba(0, 0, 0, 0.555);
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
 .hero-content {
   max-width: 450px;
+  z-index: 2;
 }
 
 /* Card  */
