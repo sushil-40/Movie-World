@@ -6,7 +6,7 @@ export const MovieCard = ({ searchedMovie }) => {
   const { Poster, Title, imdbRating, Plot } = searchedMovie;
 
   return (
-    <div className="container mt-3">
+    <div className="container mt-5">
       <div className="row border rounded text-dark p-3 movie-card-item">
         <div className="col-md">
           <img src={Poster} alt="" />

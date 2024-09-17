@@ -11,6 +11,8 @@ export const Hero = () => {
   const shouldFetchRef = useRef(true);
   const searchRef = useRef("");
 
+  const [searching, setSearching] = useState(false);
+
   useEffect(() => {
     // fetchMovie();
     if (shouldFetchRef.current) {
@@ -23,6 +25,7 @@ export const Hero = () => {
     const movie = await fetchFromAPI(str);
     setSearchedMovie(movie);
     setBgImg(movie.Poster);
+    setSearching(false);
     // console.log(movie);
   };
 
@@ -53,37 +56,43 @@ export const Hero = () => {
         style={movieStyle}
       >
         <div className="hero-content">
-          <div className="form-center">
-            <div className="text-center">
-              <h1>Search Millions of Movies</h1>
-              <p>
-                Find about the movie more in details before watching them ...
-              </p>
+          <div className={searching ? "form-center" : "form-top"}>
+            {searching && (
+              <div className="text-center">
+                <h1>Search Millions of Movies</h1>
+                <p>
+                  Find about the movie more in details before watching them ...
+                </p>
+              </div>
+            )}
+
+            <div className="input-group mby-5 mt-5">
+              <input
+                ref={searchRef}
+                onFocus={() => {
+                  setSearching(true);
+                }}
+                type="text"
+                className="form-control"
+                placeholder="search movie by name ..."
+                aria-label="search movie by name ..."
+                aria-describedby="button-addon2"
+              />
+              <button
+                onClick={handleOnMovieSearch}
+                className="btn btn-danger"
+                type="button"
+                id="button-addon2"
+              >
+                Search
+              </button>
             </div>
           </div>
-
-          <div className="input-group mby-5">
-            <input
-              ref={searchRef}
-              type="text"
-              className="form-control"
-              placeholder="search movie by name ..."
-              aria-label="search movie by name ..."
-              aria-describedby="button-addon2"
-            />
-            <button
-              onClick={handleOnMovieSearch}
-              className="btn btn-danger"
-              type="button"
-              id="button-addon2"
-            >
-              Search
-            </button>
-          </div>
-
-          <div className="movie-card-display">
-            <MovieCard searchedMovie={searchedMovie} />
-          </div>
+          {!searching && (
+            <div className="movie-card-display showMovie">
+              <MovieCard searchedMovie={searchedMovie} />
+            </div>
+          )}
         </div>
       </div>
     </div>
