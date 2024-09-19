@@ -35,6 +35,11 @@ export const Hero = () => {
     fetchMovie(str);
     searchRef.current.value = "";
   };
+  const handleOnDelete = () => {
+    setSearchedMovie({});
+    setSearching(true);
+  };
+
   const movieStyle = {
     backgroundImage: `url(
      ${bgImg}
@@ -90,7 +95,10 @@ export const Hero = () => {
           </div>
           {!searching && (
             <div className="movie-card-display showMovie">
-              <MovieCard searchedMovie={searchedMovie} />
+              <MovieCard
+                searchedMovie={searchedMovie}
+                deleteFunc={handleOnDelete}
+              />
             </div>
           )}
         </div>
