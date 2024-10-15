@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MovieCard } from "./MovieCard";
 
-export const Display = ({ movieList }) => {
+export const Display = ({ movieList, handleOnDeleteMovie }) => {
   const [displayList, setDisplayList] = useState([]);
 
   /* We use useEffect here because we need to re render the whole
@@ -58,7 +58,10 @@ export const Display = ({ movieList }) => {
           <div className="col d-flex justify-content-around gap-2 flex-wrap">
             {displayList.map((item, i) => (
               <div className="" key={i}>
-                <MovieCard searchedMovie={item} />
+                <MovieCard
+                  searchedMovie={item}
+                  deleteFunc={handleOnDeleteMovie}
+                />
               </div>
             ))}
           </div>

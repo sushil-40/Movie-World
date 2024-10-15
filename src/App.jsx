@@ -10,12 +10,20 @@ function App() {
     const tempMv = movieList.filter((item) => item.imdbID !== movie.imdbID);
     setMovieList([...tempMv, movie]);
   };
+
+  const handleOnDeleteMovie = (imdbId) => {
+    confirm("Are you sure you want to delete this movie from the list") &&
+      setMovieList(movieList.filter((mv) => mv.imdbID !== imdbId));
+  };
   return (
     <div className="wrapper">
       {/* {    hero section} */}
       <Hero addMovieToList={addMovieToList} />
       {/* {   Display Section} */}
-      <Display movieList={movieList} />
+      <Display
+        movieList={movieList}
+        handleOnDeleteMovie={handleOnDeleteMovie}
+      />
     </div>
   );
 }
