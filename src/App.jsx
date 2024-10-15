@@ -1,14 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { Display } from "./components/Display";
 import { Hero } from "./components/Hero";
+import {
+  accessFromLocalSession,
+  stroeInLocalSession,
+} from "./utils/localStorage";
 
 function App() {
   const [movieList, setMovieList] = useState([]);
+
+  useEffect(() => {
+    const mvList = accessFromLocalSession();
+    mvList?.length && setMovieList(mvList);
+  }, []);
   const addMovieToList = (movie) => {
     //remove po.ssible duplicate movies
     const tempMv = movieList.filter((item) => item.imdbID !== movie.imdbID);
     setMovieList([...tempMv, movie]);
+
+    //saving in browser session
+    stroeInLocalSession([...tempMv, movie]);
   };
 
   const handleOnDeleteMovie = (imdbId) => {
