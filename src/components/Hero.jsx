@@ -3,7 +3,7 @@ import { MovieCard } from "./MovieCard";
 import { fetchFromAPI } from "../utils/axios";
 import { randomChar } from "../utils/random";
 
-export const Hero = () => {
+export const Hero = ({ addMovieToList }) => {
   const [searchedMovie, setSearchedMovie] = useState({});
   const [bgImg, setBgImg] = useState("");
 
@@ -36,6 +36,12 @@ export const Hero = () => {
     searchRef.current.value = "";
   };
   const handleOnDelete = () => {
+    setSearchedMovie({});
+    setSearching(true);
+  };
+
+  const handleOnAddToTheList = (mood) => {
+    addMovieToList({ ...searchedMovie, mood });
     setSearchedMovie({});
     setSearching(true);
   };
@@ -98,6 +104,7 @@ export const Hero = () => {
               <MovieCard
                 searchedMovie={searchedMovie}
                 deleteFunc={handleOnDelete}
+                handleOnAddToTheList={handleOnAddToTheList}
               />
             </div>
           )}

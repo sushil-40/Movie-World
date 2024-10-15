@@ -1,7 +1,8 @@
 import React from "react";
 import { MovieCard } from "./MovieCard";
 
-export const Display = () => {
+export const Display = ({ movieList }) => {
+  console.log(movieList);
   return (
     <div className="container  mt-5 rounded">
       <div className="bg-dark p-3">
@@ -24,9 +25,9 @@ export const Display = () => {
 
         <div className="row mt-5">
           <div className="col d-flex justify-content-around gap-2 flex-wrap">
-            {new Array(10).fill("").map((item, i) => (
+            {movieList.map((item, i) => (
               <div className="" key={i}>
-                {/* <MovieCard /> */}
+                <MovieCard searchedMovie={item} />
               </div>
             ))}
           </div>

@@ -2,8 +2,12 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-export const MovieCard = ({ searchedMovie, deleteFunc }) => {
-  const { Poster, Title, imdbRating, Plot } = searchedMovie;
+export const MovieCard = ({
+  searchedMovie,
+  deleteFunc,
+  handleOnAddToTheList,
+}) => {
+  const { Poster, Title, imdbRating, Plot, mood } = searchedMovie;
 
   return (
     <div className="container mt-5">
@@ -15,11 +19,24 @@ export const MovieCard = ({ searchedMovie, deleteFunc }) => {
           <h3>{Title}</h3>
           <p>IMDB Rating: {imdbRating}</p>
           <p>{Plot?.slice(0, 50)}...</p>
-          <div className="d-flex justify-content-between">
-            <button className="btn btn-warning">Drama</button>
+          {!mood && (
+            <div className="d-flex justify-content-between">
+              <button
+                className="btn btn-warning"
+                onClick={() => handleOnAddToTheList("drama")}
+              >
+                Drama
+              </button>
 
-            <button className="btn btn-info">Action</button>
-          </div>
+              <button
+                className="btn btn-info"
+                onClick={() => handleOnAddToTheList("action")}
+              >
+                Action
+              </button>
+            </div>
+          )}
+
           <div className="d-grid mt-3">
             <button onClick={deleteFunc} className="btn btn-danger">
               Delete
