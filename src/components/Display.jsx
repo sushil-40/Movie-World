@@ -20,8 +20,8 @@ export const Display = ({ movieList, handleOnDeleteMovie }) => {
     setDisplayList(movieList.filter((mv) => mv.mood === mood));
   };
   return (
-    <div className="container  mt-5 rounded">
-      <div className="bg-dark p-3">
+    <div className="container  mt-5">
+      <div className="bg-dark p-3 rounded">
         <div className="row">
           <div className="col">
             <div className="btn-group" role="group" aria-label="Basic example">

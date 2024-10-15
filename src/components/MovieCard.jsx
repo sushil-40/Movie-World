@@ -20,16 +20,16 @@ export const MovieCard = ({
           <p>IMDB Rating: {imdbRating}</p>
           <p>{Plot?.slice(0, 50)}...</p>
           {!mood && (
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between gap-2">
               <button
-                className="btn btn-warning"
+                className="btn btn-warning flex-grow-1"
                 onClick={() => handleOnAddToTheList("drama")}
               >
                 Drama
               </button>
 
               <button
-                className="btn btn-info"
+                className="btn btn-info flex-grow-1"
                 onClick={() => handleOnAddToTheList("action")}
               >
                 Action
