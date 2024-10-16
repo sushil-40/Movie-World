@@ -6,15 +6,12 @@ import { randomChar } from "../utils/random";
 export const Hero = ({ addMovieToList }) => {
   const [searchedMovie, setSearchedMovie] = useState({});
   const [bgImg, setBgImg] = useState("");
-
-  // use this shouldFetchRef to load or fetch movie only one time when refresh the browser
   const shouldFetchRef = useRef(true);
   const searchRef = useRef("");
 
   const [searching, setSearching] = useState(false);
 
   useEffect(() => {
-    // fetchMovie();
     if (shouldFetchRef.current) {
       fetchMovie(randomChar());
       shouldFetchRef.current = false;
@@ -26,21 +23,20 @@ export const Hero = ({ addMovieToList }) => {
     setSearchedMovie(movie);
     setBgImg(movie.Poster);
     setSearching(false);
-    // console.log(movie);
   };
 
   const handleOnMovieSearch = () => {
     const str = searchRef.current.value;
-    console.log(str);
     fetchMovie(str);
     searchRef.current.value = "";
   };
+
   const handleOnDelete = () => {
     setSearchedMovie({});
     setSearching(true);
   };
 
-  const handleOnAddToTheList = (mood) => {
+  const handleOnAddTOTheList = (mood) => {
     addMovieToList({ ...searchedMovie, mood });
     setSearchedMovie({});
     setSearching(true);
@@ -48,7 +44,7 @@ export const Hero = ({ addMovieToList }) => {
 
   const movieStyle = {
     backgroundImage: `url(
-     ${bgImg}
+        ${bgImg}
     )`,
 
     backgroundRepeat: "no-repeat",
@@ -56,12 +52,12 @@ export const Hero = ({ addMovieToList }) => {
     backgroundSize: "cover",
     height: "60vh",
   };
+
   return (
     <div>
-      <nav className="py-3 text-danger fixed-top">
-        <h2 className="container">Movieworld</h2>
+      <nav className="  py-3 text-danger fixed-top">
+        <h2 className="container">MovieWorld</h2>
       </nav>
-
       <div
         className="hero d-flex justify-content-center align-items-center text-light"
         style={movieStyle}
@@ -72,17 +68,15 @@ export const Hero = ({ addMovieToList }) => {
               <div className="text-center">
                 <h1>Search Millions of Movies</h1>
                 <p>
-                  Find about the movie more in details before watching them ...
+                  FInd about the move more in details before watching them ...
                 </p>
               </div>
             )}
 
-            <div className="input-group mby-5 mt-5">
+            <div className="input-group my-5 ">
               <input
                 ref={searchRef}
-                onFocus={() => {
-                  setSearching(true);
-                }}
+                onFocus={() => setSearching(true)}
                 type="text"
                 className="form-control"
                 placeholder="search movie by name ..."
@@ -99,12 +93,13 @@ export const Hero = ({ addMovieToList }) => {
               </button>
             </div>
           </div>
+
           {!searching && (
             <div className="movie-card-display showMovie">
               <MovieCard
                 searchedMovie={searchedMovie}
                 deleteFunc={handleOnDelete}
-                handleOnAddToTheList={handleOnAddToTheList}
+                handleOnAddTOTheList={handleOnAddTOTheList}
               />
             </div>
           )}
