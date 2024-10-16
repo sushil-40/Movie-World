@@ -19,7 +19,7 @@ function App() {
     const tempMv = movieList.filter((item) => item.imdbID !== movie.imdbID);
     setMovieList([...tempMv, movie]);
 
-    //saving in browser session
+    //saving in browser session local storae
     stroeInLocalSession([...tempMv, movie]);
   };
 
